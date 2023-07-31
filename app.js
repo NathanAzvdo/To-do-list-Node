@@ -11,19 +11,26 @@ const Sequelize = require('sequelize');
 const Post = require('./models/Post')
 
   // template engine
-  app.engine('handlebars', hbs.engine);
-  app.set('view engine', 'handlebars');
+  app.engine('handlebars', handlebars.engine({
+    defaultLayout: 'main',
+    runtimeOptions: {
+        allowProtoPropertiesByDefault: true,
 
+        allowProtoMethodsByDefault: true,
+    }
+  }));
+app.set('view engine', 'handlebars');
   //bodyParser
   app.use(bodyParser.urlencoded({
     extended:false
   }));
   app.use(bodyParser.json());
 
-  // rotas
+  // rotas 
   app.get('/form', function (req, res) {
     res.render('form');
   });
+  
   app.get('/', function(req, res){
    Post.findAll().then(function(posts){
     res.render('home', {posts: posts})
@@ -46,7 +53,8 @@ const Post = require('./models/Post')
     
   });
   // express
+  
   app.use(express.static('public'));
   app.listen(8081, function () {
-    console.log("Servidor rodando na url http://localhost:8081");
+    console.log("Servidor rodando");
   });
