@@ -1,7 +1,14 @@
-<h1>Lista de posts</h1>
+<div class="center">
+<div class="ap">
+    <h1>To do list</h1>
+    <a href="/form"><button>Adicionar Tarefa</button></a>
+</div>
 {{#each posts}}
+<div class="taf">
 
 <h1>{{titulo}}</h1>
-<h2>{{conteudo}}</h2>
-<hr>
+<p>{{conteudo}}</p>
+<a href="/deletar/{{id}}"><button>Deletar</button></a>
+</div>
 {{/each}}
+</div>
